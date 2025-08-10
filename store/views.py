@@ -21,7 +21,8 @@ def add_to_cart(request, slug):
     product = get_object_or_404(Product, slug=slug)
     cart, _ = Cart.objects.get_or_create(user=user)
     order, created = Order.objects.get_or_create(user=user,
-                                           product=product)
+                                                ordered=False,
+                                                product=product)
     if created:
         cart.orders.add(order)
         cart.save()
@@ -42,6 +43,5 @@ def delete_cart(request):
     """
     cart = request.user.cart
     if cart :
-        cart.orders.all().delete()
         cart.delete()
     return redirect('index')
