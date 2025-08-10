@@ -35,4 +35,13 @@ def cart(request):
     return render(request, 'store/cart.html', context={"orders" : cart.orders.all()})
 
 def delete_cart(request):
-    pass
+    """
+    if cart := request.user.cart :
+        cart.orders.all().delete()
+        cart.delete()
+    """
+    cart = request.user.cart
+    if cart :
+        cart.orders.all().delete()
+        cart.delete()
+    return redirect('index')
