@@ -8,5 +8,4 @@
     <img src="{{  order.product.thumbnail.url }}" alt="{{  order.product.name }}", style="max-width: 250px;">
     <p>Dans le panier : {{ order.quantity }}</p>
 {% endfor %}
-<a href="{% url 'delete-cart' %}">Supprimer le panier</a>
 {% endblock %}

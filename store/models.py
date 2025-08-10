@@ -19,7 +19,6 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     ordered = models.BooleanField(default=False)
-    ordered_date = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.product.name} ({self.quantity})"
@@ -27,6 +26,8 @@ class Order(models.Model):
 class Cart(models.Model):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE) #UN USER = UN SEUL PANIER
     orders = models.ManyToManyField(Order)
+    ordered = models.BooleanField(default=False)
+    ordered_date = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.username}"
